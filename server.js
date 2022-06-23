@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
   res.json({ message: "alive" });
 });
 
-app.get("/v1/explorers", async (req, res) => {
+app.get("/explorers", async (req, res) => {
   const allExplorers = await prisma.explorer.findMany();
   res.json(allExplorers);
 });
@@ -49,7 +49,7 @@ app.put("/v1/explorers/:id", async (req, res) => {
 });
 
 app.delete("/v1/explorers/:id", async (req, res) => {
-  const id = req.params.id;
+  const id = parseInt(req.params.id);
   await prisma.explorer.delete({ where: { id: id } });
   return res.json({ message: "Eliminado correctamente" });
 });
